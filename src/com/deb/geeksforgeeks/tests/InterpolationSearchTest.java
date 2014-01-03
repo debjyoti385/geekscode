@@ -1,5 +1,6 @@
-package com.deb.geeksforgeeks.searching;
+package com.deb.geeksforgeeks.tests;
 
+import com.deb.geeksforgeeks.searching.InterpolationSearch;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -14,7 +15,7 @@ public class InterpolationSearchTest {
     @Test
     public void testInterpolateSearch() throws Exception {
         int[] array = {1,2,3,5,8,15,18,100,150};
-        Assert.assertEquals(1,InterpolationSearch.interpolateSearch(array, 2));
+        Assert.assertEquals(1, InterpolationSearch.interpolateSearch(array, 2));
         Assert.assertEquals(-1,InterpolationSearch.interpolateSearch(array, 4));
         Assert.assertEquals(-1,InterpolationSearch.interpolateSearch(array, 9));
     }
