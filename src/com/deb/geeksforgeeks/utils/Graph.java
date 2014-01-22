@@ -8,8 +8,8 @@ package com.deb.geeksforgeeks.utils;
  * To change this template use File | Settings | File Templates.
  */
 public class Graph {
-    Vertex[] vertices;
-    Edge[] edges;
+    public Vertex[] vertices;
+    public Edge[] edges;
 
     public Graph (int n, Edge[] edges){
         vertices = new Vertex[n];
@@ -17,6 +17,9 @@ public class Graph {
 
         validate();
     }
+
+
+
     public boolean validate(){
         for (int i =0 ; i< edges.length; i++){
             if(edges[i].source.name >= vertices.length || edges[i].destination.name >= vertices.length || edges[i].source.name <0 || edges[i].destination.name <0 ){

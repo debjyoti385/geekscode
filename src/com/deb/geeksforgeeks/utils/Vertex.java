@@ -8,5 +8,9 @@ package com.deb.geeksforgeeks.utils;
  * To change this template use File | Settings | File Templates.
  */
 public class Vertex {
-    int name;
+    public int name;
+
+    public Vertex(int name) {
+        this.name = name;
+    }
 }

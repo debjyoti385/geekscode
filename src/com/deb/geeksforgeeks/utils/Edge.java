@@ -7,10 +7,22 @@ package com.deb.geeksforgeeks.utils;
  * Time: 12:56 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Edge {
+public class Edge implements Comparable<Edge>{
     public Vertex source;
     public Vertex destination;
     public int weight;
+
+    public Edge(Vertex source, Vertex destination, int weight) {
+        this.source = source;
+        this.destination = destination;
+        this.weight = weight;
+    }
+
+    public Edge(int source, int destination, int weight) {
+        this.source = new Vertex(source);
+        this.destination = new Vertex(destination);
+        this.weight = weight;
+    }
 
 
 
@@ -20,5 +32,10 @@ public class Edge {
 
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    @Override
+    public int compareTo(Edge edge) {
+        return this.weight - edge.weight;
     }
 }
