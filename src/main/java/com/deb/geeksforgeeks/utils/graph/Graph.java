@@ -1,4 +1,4 @@
-package com.deb.geeksforgeeks.utils;
+package com.deb.geeksforgeeks.utils.graph;
 
 /**
  * Created with IntelliJ IDEA.

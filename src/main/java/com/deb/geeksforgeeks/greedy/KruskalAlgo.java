@@ -1,7 +1,7 @@
 package com.deb.geeksforgeeks.greedy;
 
-import com.deb.geeksforgeeks.utils.Edge;
-import com.deb.geeksforgeeks.utils.Graph;
+import com.deb.geeksforgeeks.utils.graph.Edge;
+import com.deb.geeksforgeeks.utils.graph.Graph;
 import com.deb.geeksforgeeks.utils.UnionFind;
 
 import java.util.ArrayList;

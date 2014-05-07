@@ -52,7 +52,6 @@ public class HuffmanCode {
             str.setLength(str.length() -1);
         }
 
-
     }
 
     public static void main(String[] args){
