@@ -120,18 +120,14 @@ public class ProcessStringMain {
 
 
     public String getProcessString(){
-        System.out.println(preProcessing(0));
-        String ps = getProcessStringHelper(internalColumnObjectList,null,"BE_TABLE",0);
-        System.out.println(ps);
-        print();
-        System.out.println(preProcessing(1));
-        ps = getProcessStringHelper(internalColumnObjectList,ps,"BE_TABLE",1);
-        System.out.println(ps);
-        print();
-        System.out.println(preProcessing(2));
-        ps = getProcessStringHelper(internalColumnObjectList,ps,"BE_TABLE",2);
-        System.out.println(ps);
-        print();
+        int i = 0;
+        String ps = null;
+        while(preProcessing(i)){
+            ps = getProcessStringHelper(internalColumnObjectList,ps,"BE_TABLE",i);
+            System.out.println(i +": "+ ps);
+            i++;
+        }
+//        print();
         return null;
     }
 
@@ -198,6 +194,7 @@ public class ProcessStringMain {
 
         ColumnObject co5 = new ColumnObject();
         co5.setName("`data`.OrderItems.type.subItems.id.subsub.type");
+        co5.setMappedName("subItemsSubType");
         List<Integer> arr5 = new ArrayList<Integer>();
         arr5.add(1);
         arr5.add(0);
@@ -207,6 +204,20 @@ public class ProcessStringMain {
         arr5.add(0);
         co5.setArr(arr5);
         columns.add(co5);
+
+        ColumnObject co6 = new ColumnObject();
+        co6.setName("`data`.OrderItems.type.subItems.id.subsub.internalSub.type");
+        co6.setMappedName("subItemsInternalSubType");
+        List<Integer> arr6 = new ArrayList<Integer>();
+        arr6.add(1);
+        arr6.add(0);
+        arr6.add(1);
+        arr6.add(0);
+        arr6.add(1);
+        arr6.add(1);
+        arr6.add(0);
+        co6.setArr(arr6);
+        columns.add(co6);
 
         ProcessStringMain processString = new ProcessStringMain(columns);
 
