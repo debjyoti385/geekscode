@@ -1,6 +1,9 @@
 package com.deb.geeksforgeeks.hiveprocessstring;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: debjyoti.paul
@@ -20,6 +23,7 @@ public class MappedColumnData implements Cloneable{
 
     private String mappedSourceDataType;
 
+    private ArrayList isArray;
 
     private String mappedSourceColumnDesc;
 
@@ -32,6 +36,8 @@ public class MappedColumnData implements Cloneable{
         this.mappedSourceColumn = mappedSourceColumn;
         this.mappedSourceDataType = mappedSourceDataType;
         this.mappedSourceColumnDesc = mappedSourceColumnDesc;
+        this.isArray = new ArrayList<Boolean>();
+
     }
 
     public String getPrimaryKeyCol() {
@@ -76,11 +82,20 @@ public class MappedColumnData implements Cloneable{
 
     public MappedColumnData clone(){
         try {
-            return (MappedColumnData) super.clone();
+            MappedColumnData mappedColumnData = (MappedColumnData) super.clone();
+            mappedColumnData.isArray = (ArrayList) this.isArray.clone();
+            return mappedColumnData;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
             throw new RuntimeException();
         }
     }
 
+    public List<Boolean> getArray() {
+        return isArray;
+    }
+
+    public void setArray(List<Boolean> array) {
+        isArray = (ArrayList) array;
+    }
 }

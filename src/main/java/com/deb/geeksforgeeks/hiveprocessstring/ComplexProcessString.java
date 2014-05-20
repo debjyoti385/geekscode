@@ -43,33 +43,34 @@ public class ComplexProcessString {
 
 //            internalCol.setSourceName(col.getSourceName());
 
-            internalCol.setArr(col.getArr());
             internalCol.setTargetName(col.getTargetName());
             internalCol.setAliasTableName(explodedAliasTableName);
-            if(col.getMappedDimension() == null){
-                List<String> colNameList = Arrays.asList(col.getMappedSourceColumnsArr().get(0).getMappedSourceColumn().split("\\."));
+            int length = col.getMappedSourceColumnsArr().size();
+            for(int index =0 ; index < length; index++){
+                MappedColumnData columnData = col.getMappedSourceColumnsArr().get(index);
+                List<String> colNameList = Arrays.asList(columnData.getMappedSourceColumn().split("\\."));
                 int level = 1;
-                for(Integer val : col.getArr()){
-                    if (val == 1){
+                for(Boolean val : columnData.getArray()){
+                    if (val == true){
                         String tempFQN = "";
 
                         tempFQN = Joiner.on(".").join(colNameList.subList(0,level+1));
                         if(explodeColName == null){
                             internalCol.setExplodeColumn(tempFQN);              // adding explode column name
                             explodeColName = tempFQN;
-                            col.getArr().set(level - 1,0);                      // update 1 to 0 for next iteration
+                            columnData.getArray().set(level - 1,false);                      // update 1 to 0 for next iteration
                             level++;
                         }
                         else if (explodeColName.equals(tempFQN)){
-                            col.getArr().set(level - 1,0);
+                            columnData.getArray().set(level - 1,false);
                             level++;
                             continue;
                         }
                         else{
 
-                            MappedColumnData mappedColumnData = internalCol.getMappedSourceColumnsArr().get(0);
+                            MappedColumnData mappedColumnData = internalCol.getMappedSourceColumnsArr().get(index);
                             mappedColumnData.setMappedSourceColumn(tempFQN);
-                            internalCol.getMappedSourceColumnsArr().set(0,mappedColumnData);
+                            internalCol.getMappedSourceColumnsArr().set(index,mappedColumnData);
                             internalCol.setTargetName(colNameList.get(level));
                             level++;
                             break;
@@ -82,9 +83,6 @@ public class ComplexProcessString {
                     level++;
                 }
                 internalColumnObjectList.add(internalCol);
-            }
-            else{
-                //TODO for dimension
             }
         }
         explodeColName = isExplode ? explodeColName : null;
@@ -111,9 +109,9 @@ public class ComplexProcessString {
                 StringBuilder lookupFragment = new StringBuilder();
                 lookupFragment.append("lookup('" + col.getMappedDimension() + "','" + col.getMappedDimension() + "_key'");
 
-                //                for ( MappedColumnData mappedColumnData : col.getMappedSourceColumnsArr()  ){
-                //                    lookupFragment.append(",'" + mappedColumnData.getPrimaryKeyCol() + "','" + mappedColumnData.getMappedSourceColumn() + "'");
-                //                }
+                                for ( MappedColumnData mappedColumnData : col.getMappedSourceColumnsArr()  ){
+                                    lookupFragment.append(",'" + mappedColumnData.getPrimaryKeyCol() + "','" + mappedColumnData.getMappedSourceColumn() + "'");
+                                }
 
                 lookupFragment.append(")");
                 colFragment.add(lookupFragment.toString());
@@ -155,18 +153,14 @@ public class ComplexProcessString {
         for (ExternalColumnObject col : columnObjects){
             System.out.print(col.getMappedSourceColumnsArr().get(0).getMappedSourceColumn() + "\t");
             System.out.print(col.getTargetName() + "\t");
-            for (int i : col.getArr()){
-                System.out.print(i + "\t");
-            }
+            System.out.println(col.getMappedSourceColumnsArr().get(0).getArray().toString());
             System.out.println("");
         }
         System.out.println("==============internal==================");
         for (InternalColumnObject col : internalColumnObjectList){
             System.out.print(col.getMappedSourceColumnsArr().get(0).getMappedSourceColumn() + "\t");
             System.out.print(col.getTargetName() + "\t");
-            for (int i : col.getArr()){
-                System.out.print(i + "\t");
-            }
+            System.out.println(col.getMappedSourceColumnsArr().get(0).getArray().toString());
             System.out.println("");
         }
     }
@@ -177,12 +171,12 @@ public class ComplexProcessString {
         List<MappedColumnData>  mappedColumnDataList1 = new ArrayList<MappedColumnData>();
         MappedColumnData mappedColumnData1 = new MappedColumnData();
         mappedColumnData1.setMappedSourceColumn("`data`.OrderId");
+        co1.setTargetName("orderID");
+        List<Boolean> arr1 = new ArrayList<Boolean>();
+        arr1.add(false);
+        mappedColumnData1.setArray(arr1);
         mappedColumnDataList1.add(mappedColumnData1);
         co1.setMappedSourceColumnsArr(mappedColumnDataList1);
-        co1.setTargetName("orderID");
-        List<Integer> arr1 = new ArrayList<Integer>();
-        arr1.add(0);
-        co1.setArr(arr1);
         columns.add(co1);
 
 
@@ -191,76 +185,80 @@ public class ComplexProcessString {
         List<MappedColumnData>  mappedColumnDataList2 = new ArrayList<MappedColumnData>();
         MappedColumnData mappedColumnData2 = new MappedColumnData();
         mappedColumnData2.setMappedSourceColumn("`data`.OrderItems.id");
+
+        co2.setTargetName("orderItemsID");
+        List<Boolean> arr2 = new ArrayList<Boolean>();
+        arr2.add(true);
+        arr2.add(false);
+        mappedColumnData2.setArray(arr2);
         mappedColumnDataList2.add(mappedColumnData2);
         co2.setMappedSourceColumnsArr(mappedColumnDataList2);
-        co2.setTargetName("orderItemsID");
-        List<Integer> arr2 = new ArrayList<Integer>();
-        arr2.add(1);
-        arr2.add(0);
-        co2.setArr(arr2);
         columns.add(co2);
 
         ExternalColumnObject co3 = new ExternalColumnObject();
         List<MappedColumnData>  mappedColumnDataList3 = new ArrayList<MappedColumnData>();
         MappedColumnData mappedColumnData3 = new MappedColumnData();
-        mappedColumnData3.setMappedSourceColumn("`data`.OrderItems.type");
-        mappedColumnDataList3.add(mappedColumnData3);
+
         co3.setTargetName("orderItemsType");
         co3.setMappedSourceColumnsArr(mappedColumnDataList3);
-        List<Integer> arr3 = new ArrayList<Integer>();
-        arr3.add(1);
-        arr3.add(0);
-        co3.setArr(arr3);
+        List<Boolean> arr3 = new ArrayList<Boolean>();
+        arr3.add(true);
+        arr3.add(false);
+        mappedColumnData3.setArray(arr3);
+        mappedColumnData3.setMappedSourceColumn("`data`.OrderItems.type");
+        mappedColumnDataList3.add(mappedColumnData3);
         columns.add(co3);
 
         ExternalColumnObject co4 = new ExternalColumnObject();
         List<MappedColumnData>  mappedColumnDataList4 = new ArrayList<MappedColumnData>();
         MappedColumnData mappedColumnData4 = new MappedColumnData();
         mappedColumnData4.setMappedSourceColumn("`data`.OrderItems.type.subItems.id");
+        co4.setTargetName("orderSubItemsID");
+        List<Boolean> arr4 = new ArrayList<Boolean>();
+        arr4.add(true);
+        arr4.add(false);
+        arr4.add(true);
+        arr4.add(false);
+        mappedColumnData4.setArray(arr4);
         mappedColumnDataList4.add(mappedColumnData4);
         co4.setMappedSourceColumnsArr(mappedColumnDataList4);
-        co4.setTargetName("orderSubItemsID");
-        List<Integer> arr4 = new ArrayList<Integer>();
-        arr4.add(1);
-        arr4.add(0);
-        arr4.add(1);
-        arr4.add(0);
-        co4.setArr(arr4);
         columns.add(co4);
 
         ExternalColumnObject co5 = new ExternalColumnObject();
         List<MappedColumnData>  mappedColumnDataList5 = new ArrayList<MappedColumnData>();
         MappedColumnData mappedColumnData5 = new MappedColumnData();
         mappedColumnData5.setMappedSourceColumn("`data`.OrderItems.type.subItems.id.subsub.type");
+
+        co5.setTargetName("subItemsSubType");
+        List<Boolean> arr5 = new ArrayList<Boolean>();
+        arr5.add(true);
+        arr5.add(false);
+        arr5.add(true);
+        arr5.add(false);
+        arr5.add(true);
+        arr5.add(false);
+        mappedColumnData5.setArray(arr5);
         mappedColumnDataList5.add(mappedColumnData5);
         co5.setMappedSourceColumnsArr(mappedColumnDataList5);
-        co5.setTargetName("subItemsSubType");
-        List<Integer> arr5 = new ArrayList<Integer>();
-        arr5.add(1);
-        arr5.add(0);
-        arr5.add(1);
-        arr5.add(0);
-        arr5.add(1);
-        arr5.add(0);
-        co5.setArr(arr5);
         columns.add(co5);
 
         ExternalColumnObject co6 = new ExternalColumnObject();
         List<MappedColumnData>  mappedColumnDataList6 = new ArrayList<MappedColumnData>();
         MappedColumnData mappedColumnData6 = new MappedColumnData();
         mappedColumnData6.setMappedSourceColumn("`data`.OrderItems.type.subItems.id.subsub.internalSub.type");
+
+        co6.setTargetName("subItemsInternalSubType");
+        List<Boolean> arr6 = new ArrayList<Boolean>();
+        arr6.add(true);
+        arr6.add(false);
+        arr6.add(true);
+        arr6.add(false);
+        arr6.add(true);
+        arr6.add(true);
+        arr6.add(false);
+        mappedColumnData6.setArray(arr6);
         mappedColumnDataList6.add(mappedColumnData6);
         co6.setMappedSourceColumnsArr(mappedColumnDataList6);
-        co6.setTargetName("subItemsInternalSubType");
-        List<Integer> arr6 = new ArrayList<Integer>();
-        arr6.add(1);
-        arr6.add(0);
-        arr6.add(1);
-        arr6.add(0);
-        arr6.add(1);
-        arr6.add(1);
-        arr6.add(0);
-        co6.setArr(arr6);
         columns.add(co6);
 
         ComplexProcessString processString = new ComplexProcessString(columns);

@@ -155,6 +155,95 @@ public class ProcessStringMain {
     public static void main (String args[]){
         List<ColumnObject> columns = new ArrayList<ColumnObject>();
         ColumnObject co1 = new ColumnObject();
+        co1.setName("`data`.payment_advice_transactions.transaction_deductibles.id");
+        co1.setMappedName("advice_transaction_deductibles_id");
+        List<Integer> arr1 = new ArrayList<Integer>();
+        arr1.add(1);
+        arr1.add(1);
+        arr1.add(0);
+        co1.setArr(arr1);
+        columns.add(co1);
+
+
+        ColumnObject co2 = new ColumnObject();
+        co2.setName("`data`.payment_advice_transactions.transaction_deductibles.payment_advice_transaction_id");
+        co2.setMappedName("advice_payment_transaction_id");
+        List<Integer> arr2 = new ArrayList<Integer>();
+        arr2.add(1);
+        arr2.add(1);
+        arr2.add(0);
+        co2.setArr(arr2);
+        columns.add(co2);
+
+        ColumnObject co3 = new ColumnObject();
+        co3.setName("`data`.payment_advice_transactions.transaction_deductibles.deductible_type");
+        co3.setMappedName("advice_transaction_deductibles_deductible_type_key");
+        List<Integer> arr3 = new ArrayList<Integer>();
+        arr3.add(1);
+        arr3.add(1);
+        arr3.add(0);
+        co3.setArr(arr3);
+        columns.add(co3);
+
+        ColumnObject co4 = new ColumnObject();
+        co4.setName("`data`.payment_advice_transactions.transaction_deductibles.deductible_value");
+        co4.setMappedName("advice_transaction_deductibles_deductible_value");
+        List<Integer> arr4 = new ArrayList<Integer>();
+        arr4.add(1);
+        arr4.add(1);
+        arr4.add(0);
+        co4.setArr(arr4);
+        columns.add(co4);
+
+        ColumnObject co5 = new ColumnObject();
+        co5.setName("`data`.payment_advice_transactions.transaction_deductibles.created_at");
+        co5.setMappedName("advice_transaction_deductibles_created_at_date_key");
+        List<Integer> arr5 = new ArrayList<Integer>();
+        arr5.add(1);
+        arr5.add(1);
+        arr5.add(0);
+        co5.setArr(arr5);
+        columns.add(co5);
+
+        ColumnObject co6 = new ColumnObject();
+        co6.setName("`data`.payment_advice_transactions.transaction_deductibles.created_at");
+        co6.setMappedName("advice_transaction_deductibles_created_at_time_key");
+        List<Integer> arr6 = new ArrayList<Integer>();
+        arr6.add(1);
+        arr6.add(1);
+        arr6.add(0);
+        co6.setArr(arr6);
+        columns.add(co6);
+
+        ColumnObject co7 = new ColumnObject();
+        co7.setName("`data`.payment_advice_transactions.transaction_deductibles.updated_at");
+        co7.setMappedName("advice_transaction_deductibles_updated_at_date_key");
+        List<Integer> arr7 = new ArrayList<Integer>();
+        arr7.add(1);
+        arr7.add(1);
+        arr7.add(0);
+        co7.setArr(arr7);
+        columns.add(co7);
+
+        ColumnObject co8 = new ColumnObject();
+        co8.setName("`data`.payment_advice_transactions.transaction_deductibles.updated_at");
+        co8.setMappedName("advice_transaction_deductibles_updated_at_time_key");
+        List<Integer> arr8 = new ArrayList<Integer>();
+        arr8.add(1);
+        arr8.add(1);
+        arr8.add(0);
+        co8.setArr(arr8);
+        columns.add(co8);
+
+
+        ProcessStringMain processString = new ProcessStringMain(columns);
+
+        processString.getProcessString();
+    }
+
+    private void sampleRun(){
+        List<ColumnObject> columns = new ArrayList<ColumnObject>();
+        ColumnObject co1 = new ColumnObject();
         co1.setName("`data`.OrderId");
         co1.setMappedName("orderID");
         List<Integer> arr1 = new ArrayList<Integer>();

@@ -1,6 +1,5 @@
 package com.deb.geeksforgeeks.hiveprocessstring;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +11,7 @@ import java.util.List;
  */
 public class InternalColumnObject {
 //    private String sourceName;
-    private List<Integer> isArr;
+//    private List<Integer> isArr;
     private String targetName;
     private String mappedDimension;
     private List<MappedColumnData> mappedSourceColumnsArr;
@@ -23,7 +22,7 @@ public class InternalColumnObject {
 
     public InternalColumnObject() {
 //        this.sourceName= null;
-        isArr = new ArrayList<Integer>();
+//        isArr = new ArrayList<Integer>();
         explodeColumn = null;
         targetName = null;
         aliasTableName = null;
@@ -31,7 +30,7 @@ public class InternalColumnObject {
 
     public InternalColumnObject(String sourceName, List<Integer> arr, String targetName, String mappedDimension, List<MappedColumnData> mappedSourceColumnsArr, String explodeColumn, String aliasTableName) {
 //        this.sourceName = sourceName;
-        isArr = arr;
+//        isArr = arr;
         this.targetName = targetName;
         this.mappedDimension = mappedDimension;
         this.mappedSourceColumnsArr = mappedSourceColumnsArr;
@@ -55,13 +54,13 @@ public class InternalColumnObject {
         this.targetName = targetName;
     }
 
-    public List<Integer> getArr() {
-        return isArr;
-    }
+//    public List<Integer> getArr() {
+//        return isArr;
+//    }
 
-    public void setArr(List<Integer> arr) {
-        isArr = arr;
-    }
+//    public void setArr(List<Integer> arr) {
+//        isArr = arr;
+//    }
 
 
     public String getMappedDimension() {
