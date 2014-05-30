@@ -43,7 +43,7 @@ public class ComplexProcessString {
 
 //            internalCol.setSourceName(col.getSourceName());
 
-            internalCol.setTargetName(col.getTargetName());
+            internalCol.setTargetName(col.getName());
             internalCol.setAliasTableName(explodedAliasTableName);
             int length = col.getMappedSourceColumnsArr().size();
             for(int index =0 ; index < length; index++){
@@ -137,22 +137,22 @@ public class ComplexProcessString {
     public String getProcessString(){
         int i = 0;
         String ps = null;
-//        print();
+//      print();
         while(preProcessing(i)){
             ps = getProcessStringHelper(internalColumnObjectList,ps,"BE_TABLE",i);
             System.out.println(i +": "+ ps);
             i++;
-//            print();
+//          print();
         }
         print();
-        return null;
+        return (ps + ";");
     }
 
     public void print(){
         System.out.println("=============external===============");
         for (ExternalColumnObject col : columnObjects){
             System.out.print(col.getMappedSourceColumnsArr().get(0).getMappedSourceColumn() + "\t");
-            System.out.print(col.getTargetName() + "\t");
+            System.out.print(col.getName() + "\t");
             System.out.println(col.getMappedSourceColumnsArr().get(0).getArray().toString());
             System.out.println("");
         }
@@ -171,7 +171,7 @@ public class ComplexProcessString {
         List<MappedColumnData>  mappedColumnDataList1 = new ArrayList<MappedColumnData>();
         MappedColumnData mappedColumnData1 = new MappedColumnData();
         mappedColumnData1.setMappedSourceColumn("`data`.OrderId");
-        co1.setTargetName("orderID");
+        co1.setName("orderID");
         List<Boolean> arr1 = new ArrayList<Boolean>();
         arr1.add(false);
         mappedColumnData1.setArray(arr1);
@@ -186,7 +186,7 @@ public class ComplexProcessString {
         MappedColumnData mappedColumnData2 = new MappedColumnData();
         mappedColumnData2.setMappedSourceColumn("`data`.OrderItems.id");
 
-        co2.setTargetName("orderItemsID");
+        co2.setName("orderItemsID");
         List<Boolean> arr2 = new ArrayList<Boolean>();
         arr2.add(true);
         arr2.add(false);
@@ -199,7 +199,7 @@ public class ComplexProcessString {
         List<MappedColumnData>  mappedColumnDataList3 = new ArrayList<MappedColumnData>();
         MappedColumnData mappedColumnData3 = new MappedColumnData();
 
-        co3.setTargetName("orderItemsType");
+        co3.setName("orderItemsType");
         co3.setMappedSourceColumnsArr(mappedColumnDataList3);
         List<Boolean> arr3 = new ArrayList<Boolean>();
         arr3.add(true);
@@ -213,7 +213,7 @@ public class ComplexProcessString {
         List<MappedColumnData>  mappedColumnDataList4 = new ArrayList<MappedColumnData>();
         MappedColumnData mappedColumnData4 = new MappedColumnData();
         mappedColumnData4.setMappedSourceColumn("`data`.OrderItems.type.subItems.id");
-        co4.setTargetName("orderSubItemsID");
+        co4.setName("orderSubItemsID");
         List<Boolean> arr4 = new ArrayList<Boolean>();
         arr4.add(true);
         arr4.add(false);
@@ -229,7 +229,7 @@ public class ComplexProcessString {
         MappedColumnData mappedColumnData5 = new MappedColumnData();
         mappedColumnData5.setMappedSourceColumn("`data`.OrderItems.type.subItems.id.subsub.type");
 
-        co5.setTargetName("subItemsSubType");
+        co5.setName("subItemsSubType");
         List<Boolean> arr5 = new ArrayList<Boolean>();
         arr5.add(true);
         arr5.add(false);
@@ -247,7 +247,7 @@ public class ComplexProcessString {
         MappedColumnData mappedColumnData6 = new MappedColumnData();
         mappedColumnData6.setMappedSourceColumn("`data`.OrderItems.type.subItems.id.subsub.internalSub.type");
 
-        co6.setTargetName("subItemsInternalSubType");
+        co6.setName("subItemsInternalSubType");
         List<Boolean> arr6 = new ArrayList<Boolean>();
         arr6.add(true);
         arr6.add(false);
@@ -263,6 +263,6 @@ public class ComplexProcessString {
 
         ComplexProcessString processString = new ComplexProcessString(columns);
 
-        processString.getProcessString();
+        System.out.println(processString.getProcessString());
     }
 }

@@ -12,50 +12,39 @@ import java.util.List;
  */
 public class ExternalColumnObject {
 
-//    private String sourceName;
-    private List<Integer> isArr;
-    private String targetName;
+//    private List<Integer> isArr;
+    private String name;
     private String mappedDimension;
     private List<MappedColumnData> mappedSourceColumnsArr;
 
-    public ExternalColumnObject(String sourceName, List<Integer> arr, String targetName, String mappedDimension, List<MappedColumnData> mappedSourceColumnsArr) {
-//        this.sourceName = sourceName;
-        isArr = arr;
-        this.targetName = targetName;
+    public ExternalColumnObject(String sourceName, List<Integer> arr, String name, String mappedDimension, List<MappedColumnData> mappedSourceColumnsArr) {
+//        isArr = arr;
+        this.name = name;
         this.mappedDimension = mappedDimension;
         this.mappedSourceColumnsArr = mappedSourceColumnsArr;
     }
 
     public ExternalColumnObject() {
-//        sourceName = null;
-        isArr = new ArrayList<Integer>();
-        targetName = null;
+//        isArr = new ArrayList<Integer>();
+        name = null;
         mappedDimension = null;
         mappedSourceColumnsArr = new ArrayList<MappedColumnData>();
     }
 
-//    public String getSourceName() {
-//        return sourceName;
+//    public List<Integer> getArr() {
+//        return isArr;
 //    }
 //
-//    public void setSourceName(String sourceName) {
-//        this.sourceName = sourceName;
+//    public void setArr(List<Integer> arr) {
+//        isArr = arr;
 //    }
 
-    public List<Integer> getArr() {
-        return isArr;
+    public String getName() {
+        return name;
     }
 
-    public void setArr(List<Integer> arr) {
-        isArr = arr;
-    }
-
-    public String getTargetName() {
-        return targetName;
-    }
-
-    public void setTargetName(String targetName) {
-        this.targetName = targetName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getMappedDimension() {

@@ -18,6 +18,8 @@ public class OptionalTest {
         System.out.println(foo.isPresent());
         System.out.println(foo.get());
         System.out.println(foo.asSet());
+
+        System.out.println(foo.or("HIIII").toString());
         Optional.absent();
 //
 //        Iterable<Integer> intList = new Iterable<Integer>() {
